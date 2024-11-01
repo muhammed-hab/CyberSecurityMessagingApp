@@ -3,11 +3,12 @@ package server;
 public interface PasswordHashes {
 
     /**
-     * Generates 8 securely random bytes.
-     * @return An array of 8 bytes of random data.
-     * @throws Exception If there was an error generating the salt.
+     * Generates secure random bytes
+     * @param size The number of random bytes needed
+     * @return A byte array of random data.
+     * @throws Exception If there was an error generating the data
      */
-    byte[] generateSalt() throws Exception;
+    byte[] secureRandom(int size) throws Exception;
 
     /**
      * Applies the salt to the password through XOR, repeating as necessary.

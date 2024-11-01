@@ -55,7 +55,7 @@ public interface ClientOutboundMessageParser {
      * @param message The message to encode.
      * @return The bytes of the encoded message.
      */
-    byte[] encodeMessage(ClientOutboundMessage message);
+    byte[] encodeMessage(ClientOutboundMessage message) throws IncompatibleVersionException;
 
     /**
      * Decodes a message from a byte format.

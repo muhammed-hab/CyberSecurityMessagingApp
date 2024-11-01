@@ -67,12 +67,14 @@ public interface ServerAccountHandler {
      */
     String getSessionToken(String username, String password) throws Exception;
 
+    record Log(String message, int time) {}
+
     /**
      * Saves a log
-     * @param message The message
-     * @param time The time of the message
      * @throws Exception If the message could not be logged.
      */
-    void insertLog(String message, long time) throws Exception;
+    void insertLog(Log log) throws Exception;
+
+    Log[] getLogs() throws Exception;
 
 }

@@ -13,9 +13,9 @@ public sealed interface ServerOutboundMessage {
 
     record InvalidLogin() implements ServerOutboundMessage {}
     record InvalidSessionToken() implements ServerOutboundMessage {}
-    record SuccessfulLogin(String[] sessionToken) implements ServerOutboundMessage {}
+    record SuccessfulLogin(String sessionToken) implements ServerOutboundMessage {}
 
-    record AccountCreated(String[] sessionToken) implements ServerOutboundMessage {}
+    record AccountCreated(String sessionToken) implements ServerOutboundMessage {}
     record AccountAlreadyExists() implements ServerOutboundMessage {}
 
     record MessageSent() implements ServerOutboundMessage {}

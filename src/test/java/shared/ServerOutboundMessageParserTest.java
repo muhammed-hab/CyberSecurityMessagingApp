@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ServerOutboundMessageParserTest {
 
     ServerOutboundMessageParser createCoder() {
-        throw new RuntimeException("Not implemented!");
+        return new ServerOutboundMessageParserImpl();
     }
 
     @Test

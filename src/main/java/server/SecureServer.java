@@ -64,3 +64,10 @@ public class SecureServerImpl implements SecureServer {
         }
     }
 }
+
+/* example usage:
+SSLContext sslContext = // obtain SSLContext
+SecureServer server = new SecureServerImpl();
+ServerMessageHandler handler = message -> "Received: " + message;
+
+server.startServer("localhost", 8443, sslContext, handler); */

@@ -47,3 +47,12 @@ public class CertificateLoaderImpl implements CertificateLoader {
         return sslContext;
     }
 }
+
+
+
+/* example usage:
+File certificateFile = new File("path/to/keystore.jks");
+String keystorePassword = "yourPassword";
+
+CertificateLoader loader = new CertificateLoaderImpl(keystorePassword);
+SSLContext sslContext = loader.loadCertificate(certificateFile); */

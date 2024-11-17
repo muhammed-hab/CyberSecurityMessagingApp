@@ -17,14 +17,20 @@ public class ServerResponseFormatterImpl implements ServerResponseFormatter {
                 }
                 yield output;
             }
-            case ServerOutboundMessage.Handshake handshake -> null;
-            case ServerOutboundMessage.IncompatibleVersions incompatibleVersions -> null;
-            case ServerOutboundMessage.InvalidLogin invalidLogin -> null;
-            case ServerOutboundMessage.InvalidSessionToken invalidSessionToken -> null;
-            case ServerOutboundMessage.MessageSent messageSent -> null;
-            case ServerOutboundMessage.RecentMessages recentMessages -> null;
-            case ServerOutboundMessage.ServerError serverError -> null;
-            case ServerOutboundMessage.SuccessfulLogin successfulLogin -> null;
+            case ServerOutboundMessage.Handshake handshake -> "Successfully connected to server";
+            case ServerOutboundMessage.IncompatibleVersions incompatibleVersions -> "Server not compatible";
+            case ServerOutboundMessage.InvalidLogin invalidLogin -> "Invalid Login";
+            case ServerOutboundMessage.InvalidSessionToken invalidSessionToken -> "Invalid session token";
+            case ServerOutboundMessage.MessageSent messageSent -> "Message sent";
+            case ServerOutboundMessage.RecentMessages recentMessages -> {
+                String output = "";
+                for (var msg : recentMessages.messages()) {
+                    output += String.format("From %s to %s: %s", msg.fromAccountID(), msg.toAccountID(), msg.content());
+                }
+                yield output;
+            }
+            case ServerOutboundMessage.ServerError serverError -> "Server Error";
+            case ServerOutboundMessage.SuccessfulLogin successfulLogin -> "Login successful";
         };
     }
 }

@@ -25,7 +25,7 @@ public class ServerResponseFormatterImpl implements ServerResponseFormatter {
             case ServerOutboundMessage.RecentMessages recentMessages -> {
                 String output = "";
                 for (var msg : recentMessages.messages()) {
-                    output += String.format("From %s to %s: %s", msg.fromAccountID(), msg.toAccountID(), msg.content());
+                    output += String.format("From %s to %s: %s\n", msg.fromAccountID(), msg.toAccountID(), msg.content());
                 }
                 yield output;
             }

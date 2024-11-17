@@ -31,7 +31,7 @@ class ClientOutboundMessageParserImplTest {
         var nums = new int[] {0x34, 0xFF, 0xFFFF, 0x3413, 0xFFFFFF, 0x342343, 0xFFFFFFFF, 0xFF239012};
 
         for (var num : nums) {
-            assertEquals(num, ClientOutboundMessageParserImpl.bytesToInt(ClientOutboundMessageParserImpl.intToBytes(num)));
+            assertEquals(num, ByteParsers.bytesToInt(ByteParsers.intToBytes(num)));
         }
     }
 }

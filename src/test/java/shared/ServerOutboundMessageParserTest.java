@@ -32,7 +32,17 @@ class ServerOutboundMessageParserTest {
         };
 
         for (var message : messages) {
-            assertEquals(message, coder.decodeMessage(coder.encodeMessage(message)));
+            System.out.println(message);
+            var decoded = coder.decodeMessage(coder.encodeMessage(message));
+            if (message instanceof ServerOutboundMessage.RecentMessages recent1
+                    && decoded instanceof ServerOutboundMessage.RecentMessages recent2) {
+                assertArrayEquals(recent1.messages(), recent2.messages());
+            } else if (message instanceof ServerOutboundMessage.ConversationList list1
+                    && decoded instanceof ServerOutboundMessage.ConversationList list2) {
+                assertArrayEquals(list1.with(), list2.with());
+            } else {
+                assertEquals(message, decoded);
+            }
         }
 
     }

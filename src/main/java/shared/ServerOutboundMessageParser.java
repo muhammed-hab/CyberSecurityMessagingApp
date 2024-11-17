@@ -10,7 +10,6 @@ package shared;
  *      4 bytes - version
  * {@link shared.ServerOutboundMessage.IncompatibleVersions}:
  *      4 bytes - message id = 2
- *      4 bytes - version
  * {@link shared.ServerOutboundMessage.ServerError}:
  *      4 bytes - message id = 3
  *      4 bytes - error length
@@ -19,6 +18,8 @@ package shared;
  *      4 bytes - message id = 4
  *
  *      Message format:
+ *      1 byte - is there another message: 0 if not, 1 if yes
+ *
  *      4 bytes - From length
  *      x bytes - From
  *      4 bytes - To length
@@ -26,15 +27,14 @@ package shared;
  *      4 bytes - Message length
  *      x bytes - Message
  *      4 bytes - Time
- *
- *      1 byte - is there another message: 0 if not, 1 if yes
  * {@link shared.ServerOutboundMessage.ConversationList}:
  *      4 bytes - message id = 5
  *
  *      With user format:
+ *      1 byte - is there another user: 0 if not, 1 if yes
+ *
  *      4 bytes - username length
  *      x bytes - username
- *      1 byte - is there another user: 0 if not, 1 if yes
  * {@link shared.ServerOutboundMessage.InvalidLogin}
  *      4 bytes - message id = 6
  * {@link shared.ServerOutboundMessage.InvalidSessionToken}

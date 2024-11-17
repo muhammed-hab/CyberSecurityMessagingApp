@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class PasswordHashesTest {
 
     @BeforeEach
     void setupPasswordHasher() {
-        throw new RuntimeException("Not implemented!");
+        hasher = new PasswordHashesImpl();
     }
 
     PasswordHashes hasher;
@@ -22,13 +23,13 @@ class PasswordHashesTest {
             var result = hasher.secureRandom(i);
             assertEquals(i, result.length);
             // verify that it is not array of zeros
-            assertNotEquals(new byte[i], result);
+            assertFalse(Arrays.equals(new byte[i], result));
         }
     }
 
     @Test
     void saltPassword() {
-        var salt = new byte[] { 0x0, -0x80, 0x0, -0x80 };
+        var salt = new byte[] { 0x0, -0x1, 0x0, -0x1 };
         // all 1's or 0's for easy checking
         var password = "Test message".getBytes(StandardCharsets.UTF_8);
         var digest = hasher.saltPassword(password, salt);
@@ -56,7 +57,7 @@ class PasswordHashesTest {
             // SHA-256 32 bytes
             assertEquals(32, hash1.length);
             assertEquals(32, hash2.length);
-            assertEquals(hash1, hash2);
+            assertArrayEquals(hash1, hash2);
         }
     }
 
@@ -69,12 +70,12 @@ class PasswordHashesTest {
 
         for (var msgPair : codings) {
             assertEquals(msgPair[1], hasher.encodeBase64(msgPair[0].getBytes(StandardCharsets.UTF_8)));
-            assertEquals(msgPair[0].getBytes(StandardCharsets.UTF_8), hasher.decodeBase64(msgPair[1]));
+            assertArrayEquals(msgPair[0].getBytes(StandardCharsets.UTF_8), hasher.decodeBase64(msgPair[1]));
         }
 
         for (var msg: messages) {
             var bytes = msg.getBytes(StandardCharsets.UTF_8);
-            assertEquals(bytes, hasher.decodeBase64(hasher.encodeBase64(bytes)));
+            assertArrayEquals(bytes, hasher.decodeBase64(hasher.encodeBase64(bytes)));
         }
     }
 }

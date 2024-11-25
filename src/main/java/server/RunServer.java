@@ -53,7 +53,9 @@ public class RunServer {
                 timeFetcher
         );
 
+        final var logger = new PassthroughLogger(acctMgr, onMsgReceived, passwordHashes, timeFetcher);
+
         final SecureServer server = new SecureServerImpl();
-        server.startServer(config.host, config.port, sslStore, onMsgReceived);
+        server.startServer(config.host, config.port, sslStore, logger);
     }
 }
